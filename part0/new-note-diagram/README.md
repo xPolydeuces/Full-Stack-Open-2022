@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
 browser->>server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
 browser->>server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
@@ -12,3 +13,4 @@ server-->>browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
 note over browser: browser executes the event handler that renders notes to display
 browser->>server: HTTP GET https://studies.cs.helsinki.fi/favicon.ico
 server-->>browser: favicon.ico
+```

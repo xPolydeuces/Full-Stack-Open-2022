@@ -4,7 +4,7 @@ const Course = ({course}) => (
         <Content course={course} />
         <Total course={course} />
     </div>
-    )
+)
   
 const Header = ({course}) => (
     <h2>{course.name}</h2>

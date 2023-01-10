@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Country from './components/Country'
 
 const Filter = ({newFilter, handleFilterChange}) => (
   <div>
@@ -7,22 +8,6 @@ const Filter = ({newFilter, handleFilterChange}) => (
       value={newFilter}
       onChange={handleFilterChange}
     />
-  </div>
-)
-
-const Country = ({country, languages}) => (
-  <div>
-    <h2>{country.name.common}</h2>
-    <div>capital {country.capital[0]}</div>
-    <div>area {country.area}</div>
-    <h3>languages:</h3>
-    {languages.map(language =>
-      <ul>
-        <li key={language}>{language}</li>
-      </ul>
-      )
-    }
-    <img src={country.flags.png}/>
   </div>
 )
 

@@ -1,48 +1,8 @@
 import { useEffect, useState } from 'react'
 import personService from './services/personService'
-
-
-const Filter = ({newFilter, handleFilterChange}) => (
-  <div>
-    filter shown with: <input 
-      value={newFilter}
-      onChange={handleFilterChange}
-    />
-  </div>
-)
-
-const PersonForm = ({addPerson, newName, handleNameChange, newNumber, handleNumberChange}) => (
-  <form onSubmit={addPerson}>
-    <div>
-      name: <input 
-        value={newName}
-        onChange={handleNameChange}
-      />
-    </div>
-    <div>
-      number: <input 
-        value={newNumber}
-        onChange={handleNumberChange}
-      />
-    </div>
-    <div>
-      <button type="submit">add</button>
-    </div>
-  </form>
-)
-
-const Persons = ({personsToShow}) => {
-  return(personsToShow.map(person =>
-    <>
-      <Person key={person.id} name={person.name} number={person.number}/>
-    </>
-    )
-  )
-}
-
-const Person = ({name, number}) => (
-  <div>{name} {number}</div>
-)
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 

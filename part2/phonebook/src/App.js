@@ -27,16 +27,19 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    if (newName.trim().length === 0){
-      return(alert(`${newName} is an incorrect name.`))
-    }
-    if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())){
+
+    if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase()) && newNumber === ''){
       return(alert(`${newName} is already added to phonebook`))
+    } else if (window.confirm(`${newName} is already added to phonebook, replace the old number with new one?`)){
+      updatePerson()
+      return
     }
+
     const personObject = {
       name: newName,
       number: newNumber,
     }
+
     personService
       .create(personObject)
       .then(returnedPerson => {
@@ -57,12 +60,28 @@ const App = () => {
     }
   }
 
+  const updatePerson = () => {
+    const person = persons.find(p => p.name === newName)
+    const changedPerson = { ...person, number: newNumber }
+
+    personService
+      .update(person.id, changedPerson)
+      .then(returnedPerson => {
+        setPersons(persons.map(person => person.id !== returnedPerson.id ? person : returnedPerson))
+        setNewName('')
+        setNewNumber('')
+      }
+    )
+  }
+
   const handleNameChange = (event) => (
     setNewName(event.target.value)
   )
+
   const handleNumberChange = (event) => (
     setNewNumber(event.target.value)
   )
+  
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value)
     if (event.target.value === ''){

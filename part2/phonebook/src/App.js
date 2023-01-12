@@ -13,6 +13,7 @@ const App = () => {
   const [newFilter, setNewFilter] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     console.log('effect')
@@ -62,8 +63,14 @@ const App = () => {
         .deletePerson(person.id)
         .then(() => {
           setPersons(persons.filter(p => p.id !== person.id))
-        }
-      )
+        })
+        .catch(error => {
+          setErrorMessage(`Information of ${person.name} has already been removed from server`)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2500)
+          setPersons(persons.filter(p => p.id !== person.id))
+        })
     }
   }
 
@@ -81,8 +88,14 @@ const App = () => {
         setTimeout(() => {
           setSuccessMessage(null)
         }, 2500)
-      }
-    )
+      })
+      .catch(error => {
+        setErrorMessage(`Information of ${person.name} has already been removed from server`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 2500)
+        setPersons(persons.filter(p => p.name !== newName))
+      })
   }
 
   const handleNameChange = (event) => (
@@ -107,7 +120,8 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      <Notification message={successMessage} />
+      <Notification message={successMessage} type='success'/>
+      <Notification message={errorMessage} type='error'/>
       
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange}/>
 

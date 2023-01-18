@@ -5,31 +5,45 @@ if (process.argv.length < 3) {
   process.exit(1)
 }
 
+if (process.argv.length > 5) {
+  console.log('Please provide the new person information as such: node mango.js <password> name number\n',
+              'If you are using full name, remember to enclose it in quotes as such: node mango.js <password> "Example Name" number')
+              process.exit(1)
+}
+
 const password = process.argv[2]
 
-const url = `mongodb+srv://admin:${password}@phonebook.ysdrvkf.mongodb.net/?retryWrites=true&w=majority`
+const url = `mongodb+srv://admin:${password}@phonebook.ysdrvkf.mongodb.net/phonebookApp?retryWrites=true&w=majority`
 
 const personSchema = new mongoose.Schema({
   name: String,
-  number: Number,
+  number: String,
 })
 
 const Person = mongoose.model('Person', personSchema)
 
 mongoose
   .connect(url)
-  .then((result) => {
-    console.log('connected')
-
-    const person = new Person({
-      name: 'Koharu Nagae',
-      number: 123456,
-    })
-
-    return person.save()
-  })
   .then(() => {
-    console.log('person saved!')
-    return mongoose.connection.close()
+    if (process.argv.length === 5) {
+      const person = new Person({
+        name: process.argv[3],
+        number: process.argv[4],
+      })
+      .save()
+      .then(result => {
+        console.log(`added ${process.argv[3]} number ${process.argv[4]} to phonebook`)
+        mongoose.connection.close()
+      })
+    } else {
+      Person.find({})
+      .then(result => {
+        console.log('phonebook:')
+        result.forEach(person => {
+          console.log(person['name'], person['number'])
+        })
+        mongoose.connection.close()
+      })
+    }
   })
   .catch((err) => console.log(err))

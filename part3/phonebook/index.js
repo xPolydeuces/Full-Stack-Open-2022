@@ -44,13 +44,30 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
+    const body = request.body
+
     new Person({
-        name: request.body.name,
-        number: request.body.number
+        name: body.name,
+        number: body.number
     }).save()
     .then(person => {
         response.json(person)
     })
+})
+
+app.put('/api/persons/:id', (request, response, next) => {
+    const body = request.body
+
+    const person = {
+        name: body.name,
+        number: body.number,
+    }
+
+    Person.findByIdAndUpdate(request.params.id, person, {new: true})
+        .then(updatedPerson => {
+            response.json(updatedPerson)
+        })
+        .catch(error => next(error))
 })
 
 const PORT = process.env.PORT

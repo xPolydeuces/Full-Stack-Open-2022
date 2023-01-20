@@ -55,6 +55,12 @@ const App = () => {
           setSuccessMessage(null)
         }, 2500)
       })
+      .catch(error => {
+        setErrorMessage(error.response.data.error)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 4000)
+      })
   }
 
   const deletePerson = (person) => {
@@ -68,7 +74,7 @@ const App = () => {
           setErrorMessage(`Information of ${person.name} has already been removed from server`)
           setTimeout(() => {
             setErrorMessage(null)
-          }, 2500)
+          }, 4000)
           setPersons(persons.filter(p => p.id !== person.id))
         })
     }
@@ -93,7 +99,7 @@ const App = () => {
         setErrorMessage(`Information of ${person.name} has already been removed from server`)
         setTimeout(() => {
           setErrorMessage(null)
-        }, 2500)
+        }, 4000)
         setPersons(persons.filter(p => p.name !== newName))
       })
   }

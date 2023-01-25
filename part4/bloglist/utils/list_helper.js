@@ -16,12 +16,19 @@ const favoriteBlog = (blogs) => {
 
 const mostBlogs = (blogs) => {
   if (blogs.length !== 0) {
-    return {}
+    const authors = blogs.reduce((author, blog) => {
+      author[blog.author] = (author[blog.author] || 0) + 1
+      return author
+    }, {})
+    return {
+      author,
+      blogs
+    }
   } else {
     return null
   }
 }
 
 module.exports = {
-  dummy, totalLikes, favoriteBlog
+  dummy, totalLikes, favoriteBlog, mostBlogs
 }

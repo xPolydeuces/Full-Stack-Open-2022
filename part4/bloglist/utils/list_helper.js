@@ -20,9 +20,11 @@ const mostBlogs = (blogs) => {
       author[blog.author] = (author[blog.author] || 0) + 1
       return author
     }, {})
+    const maxBlogs = Math.max(...Object.values(authors))
+    const author = Object.keys(authors).find(author => authors[author] === maxBlogs)
     return {
       author,
-      blogs
+      blogs: maxBlogs
     }
   } else {
     return null

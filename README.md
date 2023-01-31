@@ -13,6 +13,7 @@
 * [![NodeJS][Node.js]][Node-url]
 * [![Express][Express.js]][Express-url]
 * [![MongoDB][MongoDB.com]][MongoDB-url]
+* [![Jest][Jest.js]][Jest-url]
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -47,3 +48,5 @@
 [Express-url]: https://expressjs.com/
 [Node.js]: https://img.shields.io/badge/NodeJS-303030?style=for-the-badge&logo=nodedotjs&logoColor=68A063
 [Node-url]: https://nodejs.org/en/
+[Jest.js]: https://img.shields.io/badge/Jest-EEC5B9?style=for-the-badge&logo=jest&logoColor=C63D14
+[Jest-url]: https://jestjs.io/

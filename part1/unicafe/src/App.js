@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Button from './components/Button'
 import Stat from './components/Stat'
 import Buttons from './components/Buttons'
+import Stats from './components/Stats'
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -37,9 +38,7 @@ const App = () => {
       <Header text='give feedback'></Header>
       <Buttons stats={statistics} />
       <Header text='statistics'></Header>
-      <Stat text='good' value={good} />
-      <Stat text='neutral' value={neutral} />
-      <Stat text='bad' value={bad} />
+      <Stats stats={statistics} />
     </div>
   )
 }

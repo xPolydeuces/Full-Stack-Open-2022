@@ -13,12 +13,14 @@ const Stats = ({ stats }) =>
     )
   }
   return (
-    <>
-      {stats.map(stat => <StatisticLine key={stat.id} text={stat.text} value={stat.value}/>)}
-      <StatisticLine text='all' value={stats.reduce((sum, stat) => sum + stat.value, 0)} />
-      <StatisticLine text='average' value={(good - bad) / (good + neutral + bad)} />
-      <StatisticLine text='positive' value={good / (good + neutral + bad) * 100 + ' %'} />
-    </>
+    <table>
+      <tbody>
+        {stats.map(stat => <StatisticLine key={stat.id} text={stat.text} value={stat.value}/>)}
+        <StatisticLine text='all' value={stats.reduce((sum, stat) => sum + stat.value, 0)} />
+        <StatisticLine text='average' value={(good - bad) / (good + neutral + bad)} />
+        <StatisticLine text='positive' value={good / (good + neutral + bad) * 100 + ' %'} />
+      </tbody>
+    </table>
   )
 }
 

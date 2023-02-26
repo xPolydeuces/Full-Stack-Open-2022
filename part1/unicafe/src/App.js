@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header'
 import Buttons from './components/Buttons'
-import Stats from './components/Stats'
+import Statistics from './components/Statistics'
 
 const App = () => {
   const [good, setGood] = useState(0)
@@ -34,7 +34,7 @@ const App = () => {
       <Header text='give feedback' />
       <Buttons stats={statistics} />
       <Header text='statistics' />
-      <Stats stats={statistics} />
+      <Statistics stats={statistics} />
     </div>
   )
 }

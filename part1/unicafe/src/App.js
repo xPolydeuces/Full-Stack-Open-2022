@@ -1,9 +1,5 @@
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line no-unused-vars
 import { useState } from 'react'
 import Header from './components/Header'
-import Button from './components/Button'
-import Stat from './components/Stat'
 import Buttons from './components/Buttons'
 import Stats from './components/Stats'
 
@@ -35,9 +31,9 @@ const App = () => {
 
   return (
     <div>
-      <Header text='give feedback'></Header>
+      <Header text='give feedback' />
       <Buttons stats={statistics} />
-      <Header text='statistics'></Header>
+      <Header text='statistics' />
       <Stats stats={statistics} />
     </div>
   )

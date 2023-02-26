@@ -5,6 +5,13 @@ const Stats = ({ stats }) =>
   const good = stats[0].value
   const neutral = stats[1].value
   const bad = stats[2].value
+  if (good + neutral + bad === 0) {
+    return (
+      <>
+        <p>No feedback given</p>
+      </>
+    )
+  }
   return (
     <>
       {stats.map(stat => <Stat key={stat.id} text={stat.text} value={stat.value}/>)}

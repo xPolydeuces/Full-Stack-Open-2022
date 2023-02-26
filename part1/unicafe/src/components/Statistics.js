@@ -1,4 +1,4 @@
-import Stat from './Stat'
+import StatisticLine from './StatisticLine'
 
 const Stats = ({ stats }) =>
 {
@@ -14,10 +14,10 @@ const Stats = ({ stats }) =>
   }
   return (
     <>
-      {stats.map(stat => <Stat key={stat.id} text={stat.text} value={stat.value}/>)}
-      <Stat text='all' value={stats.reduce((sum, stat) => sum + stat.value, 0)} />
-      <Stat text='average' value={(good - bad) / (good + neutral + bad)} />
-      <Stat text='positive' value={good / (good + neutral + bad) * 100 + ' %'} />
+      {stats.map(stat => <StatisticLine key={stat.id} text={stat.text} value={stat.value}/>)}
+      <StatisticLine text='all' value={stats.reduce((sum, stat) => sum + stat.value, 0)} />
+      <StatisticLine text='average' value={(good - bad) / (good + neutral + bad)} />
+      <StatisticLine text='positive' value={good / (good + neutral + bad) * 100 + ' %'} />
     </>
   )
 }

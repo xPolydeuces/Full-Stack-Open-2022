@@ -1,6 +1,6 @@
 import StatisticLine from './StatisticLine'
 
-const Stats = ({ stats }) =>
+const Statistics = ({ stats }) =>
 {
   const good = stats[0].value
   const neutral = stats[1].value
@@ -24,4 +24,4 @@ const Stats = ({ stats }) =>
   )
 }
 
-export default Stats
+export default Statistics

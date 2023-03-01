@@ -1,24 +1,41 @@
 import { useState } from 'react'
+import Header from './components/Header'
+import Buttons from './components/Buttons'
+import Statistics from './components/Statistics'
 
 const App = () => {
-  const anecdotes = [
-    'If it hurts, do it more often.',
-    'Adding manpower to a late software project makes it later!',
-    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-    'Premature optimization is the root of all evil.',
-    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
-    'The only way to go fast, is to go well.'
-  ]
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
 
-  const [selected, setSelected] = useState(0)
+  const statistics = [
+    {
+      id: 1,
+      value: good,
+      setState: setGood,
+      text: 'good'
+    },
+    {
+      id: 2,
+      value: neutral,
+      setState: setNeutral,
+      text: 'neutral'
+    },
+    {
+      id: 3,
+      value: bad,
+      setState: setBad,
+      text: 'bad'
+    }
+  ]
 
   return (
     <div>
-      {anecdotes[selected]}
+      <Header text='give feedback' />
+      <Buttons stats={statistics} />
+      <Header text='statistics' />
+      <Statistics stats={statistics} />
     </div>
   )
 }
-
 export default App

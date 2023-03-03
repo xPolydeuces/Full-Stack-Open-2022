@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Button from './components/Button'
+import Header from './components/Header'
+import Text from './components/Text'
 
 const App = () => {
   const anecdotes = [
@@ -28,10 +30,12 @@ const App = () => {
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
-      <Button handleClick={() => setVotes(vote)} text='vote'/>
-      <Button handleClick={() => setSelected(randomize)} text='next anecdote'/>
+      <Header text="Anecdote of the day" />
+      <Text text={anecdotes[selected]} />
+      <Text text={`has ${votes[selected]} votes`} />
+      <Button handleClick={() => setVotes(vote)} text='vote' />
+      <Button handleClick={() => setSelected(randomize)} text='next anecdote' />
+      <Header text="Anecdote with most votes" />
     </div>
   )
 }

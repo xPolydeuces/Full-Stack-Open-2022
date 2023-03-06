@@ -1,9 +1,8 @@
-import Header from './components/Header'
-import Content from './components/Content'
-import Total from './components/Total'
+import Course from './components/Course'
 
 const App = () => {
   const course = {
+    id: 1,
     name: 'Half Stack application development',
     parts: [
       {
@@ -24,13 +23,7 @@ const App = () => {
     ]
   }
 
-  return (
-    <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
-    </div>
-  )
+  return <Course course={course} />
 }
 
 export default App

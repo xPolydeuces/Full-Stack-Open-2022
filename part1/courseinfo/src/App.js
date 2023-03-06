@@ -1,6 +1,6 @@
-import Header from "./components/Header"
-import Content from "./components/Content"
-import Total from "./components/Total"
+import Header from './components/Header'
+import Content from './components/Content'
+import Total from './components/Total'
 
 const App = () => {
   const course = {
@@ -20,14 +20,14 @@ const App = () => {
         id: 3,
         name: 'State of a component',
         exercises: 14
-      },
+      }
     ]
   }
 
   return (
     <div>
       <Header course={course.name} />
-      <Content parts={course.parts}/>
+      <Content parts={course.parts} />
       <Total parts={course.parts} />
     </div>
   )

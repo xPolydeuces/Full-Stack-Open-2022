@@ -11,7 +11,7 @@ const App = () => {
   ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [newFilter, setNewFilter] = useState('')
+  const [filter, setFilter] = useState('')
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -38,13 +38,13 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    setNewFilter(event.target.value)
+    setFilter(event.target.value)
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter persons={ newFilter } handler={ handleFilterChange }/>
+      <Filter filter={ filter } handler={ handleFilterChange }/>
       <form onSubmit={ addPerson }>
         <div>
           name: <input value={ newName } onChange={ handleNameChange } />
@@ -57,7 +57,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <Persons persons={ persons } />
+      <Persons persons={ persons } filter={ filter }/>
     </div>
   )
 }

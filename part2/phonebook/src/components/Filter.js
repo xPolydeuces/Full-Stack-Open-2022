@@ -1,6 +1,6 @@
-const Filter = ({ persons, handler }) => (
+const Filter = ({ filter, handler }) => (
   <>
-    <p>filter shown with <input value={ value } onChange={ handler } /> </p>
+    <p>filter shown with <input value={ filter } onChange={ handler } /> </p>
   </>
 )
 

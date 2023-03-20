@@ -37,6 +37,11 @@ const App = () => {
     setNewNumber('')
   }
 
+  const deletePerson = (event) => {
+    event.preventDefault()
+    console.log(event)
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }

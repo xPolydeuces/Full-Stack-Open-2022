@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -63,6 +64,13 @@ const App = () => {
           setPersons(persons.filter(p => p.id !== person.id))
         }
         )
+        .catch(() => {
+          setErrorMessage(`The person '${person.name}' was already deleted from the server.`)
+          setPersons(persons.filter(p => p.id !== person.id))
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 3000)
+        })
     }
   }
 
@@ -82,6 +90,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={ successMessage } type={ 'success' } />
+      <Notification message={ errorMessage } type={ 'error' } />
       <Filter filter={ filter } handler={ handleFilterChange }/>
       <PersonForm addPerson={ addPerson } newName={ newName } handleNameChange={ handleNameChange } newNumber={ newNumber } handleNumberChange={ handleNumberChange } />
       <h2>Numbers</h2>

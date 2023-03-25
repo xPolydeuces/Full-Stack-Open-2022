@@ -5,7 +5,7 @@ import Countries from './components/Countries'
 import Filter from './components/Filter'
 
 const App = () => {
-  const [countries, setCountries] = useState(null)
+  const [countries, setCountries] = useState([])
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const App = () => {
           setCountries(initialCountries.data)
         })
     }
-  }, countries)
+  }, [])
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
@@ -28,6 +28,7 @@ const App = () => {
   return(
     <div>
       <Filter filter={ filter } handler={ handleFilterChange } />
+      <Countries countries={ countries } filter={ filter } />
     </div>
   )
 }

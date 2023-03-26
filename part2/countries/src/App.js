@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Countries from './components/Countries'
@@ -28,7 +27,7 @@ const App = () => {
   return(
     <div>
       <Filter filter={ filter } handler={ handleFilterChange } />
-      <Countries countries={ countries } filter={ filter } />
+      <Countries countries={ countries } filter={ filter } setFilter={ setFilter }/>
     </div>
   )
 }

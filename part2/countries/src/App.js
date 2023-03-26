@@ -6,6 +6,13 @@ import Filter from './components/Filter'
 const App = () => {
   const [countries, setCountries] = useState([])
   const [filter, setFilter] = useState('')
+  const pageStyle = {
+    height: '100vh',
+    minHeight: '100vh',
+    padding: '10px',
+    background: '#2b3137',
+    color: '#fafbfc'
+  }
 
   useEffect(() => {
     if (countries) {
@@ -22,7 +29,7 @@ const App = () => {
   }
 
   return(
-    <div>
+    <div style= { pageStyle }>
       <Filter filter={ filter } handler={ handleFilterChange } />
       <Countries countries={ countries } filter={ filter } setFilter={ setFilter }/>
     </div>

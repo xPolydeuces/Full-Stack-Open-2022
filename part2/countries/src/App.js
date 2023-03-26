@@ -8,10 +8,7 @@ const App = () => {
   const [filter, setFilter] = useState('')
 
   useEffect(() => {
-    console.log('effect')
-
     if (countries) {
-      console.log('Fetching...')
       axios
         .get('https://restcountries.com/v3.1/all')
         .then(initialCountries => {

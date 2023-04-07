@@ -23,6 +23,7 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
+
     if (persons.some(person => person.name === newName)){
       if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`))
       {
@@ -37,12 +38,19 @@ const App = () => {
         .create(personObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setSuccessMessage(`Added ${newName}.`)
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 3000)
         })
-      setSuccessMessage(`Added ${newName}.`)
-      setTimeout(() => {
-        setSuccessMessage(null)
-      }, 3000)
+        .catch(error => {
+          setErrorMessage(error.response.data.error)
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 3000)
+        })
     }
+
     setNewName('')
     setNewNumber('')
   }

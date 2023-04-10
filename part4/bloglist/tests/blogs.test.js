@@ -83,3 +83,30 @@ describe('total likes', () => {
     expect(result).toBe(36)
   })
 })
+
+describe('favorite blog', () => {
+  test('of empty list is an empty object', () => {
+    const result = listHelper.favoriteBlog([])
+    expect(result).toEqual({})
+  })
+  test('when list has only one blog, equals that blog', () => {
+    const result = listHelper.favoriteBlog(listWithOneBlog)
+    expect(result).toEqual(
+      {
+        title: 'Go To Statement Considered Harmful',
+        author: 'Edsger W. Dijkstra',
+        likes: 5
+      }
+    )
+  })
+  test('of a bigger list returns right blog', () => {
+    const result = listHelper.favoriteBlog(listOfManyBlogs)
+    expect(result).toEqual(
+      {
+        title: 'Canonical string reduction',
+        author: 'Edsger W. Dijkstra',
+        likes: 12
+      }
+    )
+  })
+})

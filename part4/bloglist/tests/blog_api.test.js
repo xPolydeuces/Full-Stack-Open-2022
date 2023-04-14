@@ -33,6 +33,21 @@ test('unique identifier property is named id', async () => {
   expect(response.body[0].id).toBeDefined()
 })
 
+test('POST operation is successful', async () => {
+  await api
+    .post('/api/blogs')
+    .send({ title: 'Test blog',
+      author: 'Test-Chan',
+      url: 'https://testingpost.com/',
+      likes: 21 })
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await api.get('/api/blogs')
+
+  expect(response.body).toHaveLength(helper.length + 1)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })

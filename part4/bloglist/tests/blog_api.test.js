@@ -34,18 +34,19 @@ test('unique identifier property is named id', async () => {
 })
 
 test('POST operation is successful', async () => {
-  await api
-    .post('/api/blogs')
-    .send({ title: 'Test blog',
-      author: 'Test-Chan',
-      url: 'https://testingpost.com/',
-      likes: 21 })
+  const testBlog = {
+    title: 'Test blog',
+    author: 'Test-Chan',
+    url: 'https://testingpost.com/',
+    likes: 21
+  }
+  await api.post('/api/blogs', testBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/blogs')
+  const blogsAtEnd = await helper.blogsInDb()
 
-  expect(response.body).toHaveLength(helper.initialBlogs.length + 1)
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 })
 
 test('if the likes property is missing, it will default to 0', async () => {

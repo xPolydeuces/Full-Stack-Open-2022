@@ -8,7 +8,7 @@ const helper = require('./test_helper')
 beforeEach(async () => {
   await Blog.deleteMany({})
 
-  for (let blog of helper) {
+  for (let blog of helper.initialBlogs) {
     let blogObject = new Blog(blog)
     await blogObject.save()
   }
@@ -24,7 +24,7 @@ test('blogs are returned as json', async () => {
 test('correct amount of blogs is returned', async () => {
   const response = await api.get('/api/blogs')
 
-  expect(response.body).toHaveLength(helper.length)
+  expect(response.body).toHaveLength(helper.initialBlogs.length)
 })
 
 test('unique identifier property is named id', async () => {
@@ -45,8 +45,22 @@ test('POST operation is successful', async () => {
 
   const response = await api.get('/api/blogs')
 
-  expect(response.body).toHaveLength(helper.length + 1)
+  expect(response.body).toHaveLength(helper.initialBlogs.length + 1)
 })
+
+test('if the likes property is missing, it will default to 0', async () => {
+  const newBlog = {
+    title: 'async/await simplifies making async calls',
+    author: 'Edsger W. Dijkstra',
+    url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html'
+  }
+
+  await api.post('/api/blogs', newBlog)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd[blogsAtEnd.length - 1].likes).toBe(0)
+})
+
 
 afterAll(async () => {
   await mongoose.connection.close()

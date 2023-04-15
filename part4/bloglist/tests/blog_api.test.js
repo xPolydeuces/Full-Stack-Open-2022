@@ -40,7 +40,8 @@ test('POST operation is successful', async () => {
     url: 'https://testingpost.com/',
     likes: 21
   }
-  await api.post('/api/blogs', testBlog)
+  await api.post('/api/blogs')
+    .send(testBlog)
     .expect(201)
     .expect('Content-Type', /application\/json/)
 
@@ -50,16 +51,27 @@ test('POST operation is successful', async () => {
 })
 
 test('if the likes property is missing, it will default to 0', async () => {
-  const newBlog = {
-    title: 'async/await simplifies making async calls',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html'
+  const testBlog = {
+    title: 'Test blog',
+    author: 'Test-Chan',
+    url: 'https://testingpost.com/'
   }
 
-  await api.post('/api/blogs', newBlog)
+  await api.post('/api/blogs').send(testBlog)
 
   const blogsAtEnd = await helper.blogsInDb()
   expect(blogsAtEnd[blogsAtEnd.length - 1].likes).toBe(0)
+})
+
+test('if the title or url properties are missing, responds with the status code 400 Bad Request', async () => {
+  const testBlog = {
+    author: 'Test-Chan',
+    likes: 21
+  }
+
+  await api.post('/api/blogs')
+    .send(testBlog)
+    .expect(400)
 })
 
 

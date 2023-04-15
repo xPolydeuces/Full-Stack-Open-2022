@@ -31,8 +31,8 @@ describe('when there is initally some blogs saved', () => {
   })
 })
 
-describe('addition of a new blog', () => {
-  test('succeeds with valid data', async () => {
+describe('adding, deleting and updating the blog list', () => {
+  test('successfully add a new blog', async () => {
     const newBlog = {
       title: 'Test blog',
       author: 'Test-Chan',
@@ -53,6 +53,40 @@ describe('addition of a new blog', () => {
     expect(titles).toContain('Test blog')
   })
 
+  test('successfully delete a blog', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(204)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
+  })
+
+  test('successfully updates a blog', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToUpdate = blogsAtStart[0]
+    const updatedBlog = {
+      ...blogToUpdate,
+      likes: blogToUpdate.likes + 1
+    }
+
+    await api.put(`/api/blogs/${blogToUpdate.id}`).send(updatedBlog).expect(200)
+
+    const blogsAtEnd = await helper.blogsInDb()
+
+    expect(blogsAtEnd).toHaveLength(blogsAtStart.length)
+
+    const updatedBlogInDb = blogsAtEnd.find(blog => blog.id === blogToUpdate.id)
+
+    expect(updatedBlogInDb.likes).toBe(updatedBlog.likes)
+  })
+
+})
+
+describe('adding blogs without full data', () => {
   test('if the likes property is missing, it will default to 0', async () => {
     const newBlog = {
       title: 'Test blog',
@@ -79,17 +113,7 @@ describe('addition of a new blog', () => {
   })
 })
 
-test('successfully delete a blog', async () => {
-  const blogsAtStart = await helper.blogsInDb()
-  const blogToDelete = blogsAtStart[0]
 
-  await api
-    .delete(`/api/blogs/${blogToDelete.id}`)
-    .expect(204)
-
-  const blogsAtEnd = await helper.blogsInDb()
-  expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
-})
 
 afterAll(async () => {
   await mongoose.connection.close()

@@ -113,8 +113,6 @@ describe('adding blogs without full data', () => {
   })
 })
 
-
-
 afterAll(async () => {
   await mongoose.connection.close()
 })

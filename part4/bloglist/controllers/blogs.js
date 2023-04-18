@@ -23,7 +23,11 @@ blogsRouter.post('/', async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes || 0,
+<<<<<<< HEAD
     user: user._id
+=======
+    user: user.id
+>>>>>>> 018e071f9572843b5aaeb47e909c75467d8b8695
   }
 
   const blogModel = new Blog(blog)

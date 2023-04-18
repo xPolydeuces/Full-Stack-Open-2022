@@ -23,11 +23,7 @@ blogsRouter.post('/', async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes || 0,
-<<<<<<<<< Temporary merge branch 1
-    user: user.id
-=========
     user: user._id
->>>>>>>>> Temporary merge branch 2
   }
 
   const blogModel = new Blog(blog)
